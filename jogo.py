@@ -8,8 +8,8 @@ class jogo():
       self.sorteio()
       self.jogador = self.jogadores
       self.tabuleiro = np.zeros([3,3]) #Matriz do jogo
-      self.games_X = 0
-      self.games_O = 0
+      self.GX = 0
+      self.GO = 0
   
   
   def jogar(self):
