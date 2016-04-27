@@ -1,4 +1,4 @@
-class Jogos:
+class Jogo:
          
          def __init__(self):
              self.Matriz_Jogo = [[0,0,0],[0,0,0],[0,0,0]]
