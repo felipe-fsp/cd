@@ -22,6 +22,28 @@ class jogo():
     	self.jogador=self.jogadores[1]
     
   def recebe_jogada(self,l,c):
+    continua = self.verifica_ganhador()
+    if continua == -1: #Se não houve vencedor e não deu velha, temos jogo pela frente!
+        if self.tabuleiro[l][c] == 0:
+            if self.jogador == self.jogadores[0]: 
+                self.tabuleiro[l][c] = 1
+                print(self.tabuleiro)
+                print()
+                self.jogador = self.jogadores[1]
+                continua = self.verifica_ganhador()
+                
+            elif self.jogador == self.jogadores[1]:
+                self.matriz[l][c] = 2
+                print(self.tabuleiro)
+                print()
+                self.jogador = self.jogadores[0]
+                continua = self.verifica_ganhador()
+    elif continua == 2:
+        self.GO +=1
+    elif verifica == 1:
+        self.GX +=1
+    else:
+        pass
     
   
   def verifica_ganhador(self):
