@@ -1,22 +1,39 @@
 # -*- coding: utf-8 -*-
 
 import tkinter as tk
+import ClasseJogo
 
 class Tabuleiro:
     
     def __init__(self):
 
+        self.Main_Game = ClasseJogo.Jogo()
         self.window = tk.Tk()               
-        self.window.title("Jogo da Velha")
-        self.window.geometry("470x470")
-        self.botão_main = tk.Button(self.window,height =8, width =20,text="Iniciar Jogo",command = self.limpar_tela)
-        self.botão_main.grid(padx = 160,pady=150)   
+        self.window.resizable(height = False, width=False)        
+        self.window.title("Tic Tac Toe")
+        self.window.geometry("650x650")
+        for linhas in range (0,5):
+           self.window.rowconfigure(linhas, weight=1)
+        for colunas in range (0,3):        
+           self.window.columnconfigure(colunas, weight=1)
         self.Game_var = 0
+        self.Jogador_1_vic = 0        
+        self.Jogador_2_vic = 0
         self.jogador_id = 0
         self.jogador_nome_var = tk.StringVar()
-        self.jogador_nome = "Bambam"        
-        self.jogador_nome_var.set("É a vez do " + self.jogador_nome)                        
-        self.loop()
+        self.jogador_nome_1 = tk.StringVar()
+        self.jogador_nome_2 = tk.StringVar()
+        self.label_principal_show = tk.StringVar()
+        self.label_principal = ""
+        self.jogador_nome = ""
+        self.jogador_nome_temp_1 = ""         
+        self.jogador_nome_temp_2 = ""
+        self.Text_Main = tk.Label(self.window,text="Jogo da Velha", font = "Britannic 30")
+        self.Text_Main.configure( bg = "blue", fg = "white")        
+        self.Text_Main.grid(row=0, column=0, columnspan=3, rowspan = 3 ,sticky="nsew")         
+        self.Button_Main = tk.Button(self.window,text="Iniciar Jogo")
+        self.Button_Main.configure(command=self.escolha_jogadores)
+        self.Button_Main.grid(row=3, column=0, columnspan =3, rowspan = 2, sticky = "nsew")
         
     def limpar_tela(self):
         self.Matriz_Jogo = [[0,0,0],[0,0,0],[0,0,0]]
