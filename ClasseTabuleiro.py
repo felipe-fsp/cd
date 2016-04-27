@@ -2,10 +2,11 @@
 
 import tkinter as tk
 import ClasseJogo
+from PIL import Image, ImageTk # Para usar a imagem do botão reiniciar
 
 class Tabuleiro:
     
-    def __init__(self):
+    def __init__(self): #   Configurações iniciais
 
         self.Main_Game = ClasseJogo.Jogo()
         self.window = tk.Tk()               
@@ -41,7 +42,7 @@ class Tabuleiro:
         self.Button_Main.configure(command=self.escolha_jogadores)
         self.Button_Main.grid(row=3, column=0, columnspan =3, rowspan = 2, sticky = "nsew")
         
-    def escolha_jogadores(self):
+    def escolha_jogadores(self): # Tela que dá nome aos jogadores
         self.Button_Main.grid_forget()        
         self.Text_Main.grid_forget()
         
@@ -63,7 +64,7 @@ class Tabuleiro:
         self.Button_Main.configure(command = self.enter)      
         self.Button_Main.grid(row=4, column=0, columnspan = 3, rowspan = 1, sticky = "nsew")     
      
-     def enter(self):       
+     def enter(self): #Ao dar nome, o que será feito      
         self.jogador_nome_temp_1 = self.jogador_nome_1.get()
         self.jogador_nome_temp_2 = self.jogador_nome_2.get()
         self.jogador_nome = self.jogador_nome_temp_1      
@@ -72,7 +73,7 @@ class Tabuleiro:
         self.Jogador_2_vic_var.set("Vitórias do {0}: 0".format(self.jogador_nome_temp_2))        
         self.limpar_tela()
         
-    def limpar_tela(self):
+    def limpar_tela(self): #Limpar a tela para um novo jogo
       
         if self.Game_var == 0:
             self.Button_Main.grid_forget()
@@ -98,7 +99,7 @@ class Tabuleiro:
             self.Prox_Jogada.grid_forget()   
             self.desenhar_tabuleiro()
             
-    def bo_1(self):
+    def bo_1(self): #Configuração de todos os botões
         self.Main_Game.recebe_jogada(0,0)
         self.jogador()        
         if self.Main_Game.jogador == 1:
@@ -192,7 +193,7 @@ class Tabuleiro:
         self.vitoria()              
     
     
-    def desenhar_tabuleiro(self):
+    def desenhar_tabuleiro(self): # Desenhar o tabuleiro principal do jogo
         self.b_1 = tk.Button(self.window, height = 6, width = 40)
         self.b_1.configure(command=self.bo_1)
         self.b_1.grid(row=0, column=0, sticky = "ns")
@@ -246,7 +247,7 @@ class Tabuleiro:
         self.Main_label.grid(row=4, column=0, columnspan=3, rowspan = 1, sticky="nsew") 
     
         
-    def jogador(self):
+    def jogador(self): #Atualiza a label do próximo jogador
         if self.jogador_id == 0:
             self.jogador_id += 1
             self.jogador_nome = self.jogador_nome_temp_2
@@ -260,7 +261,7 @@ class Tabuleiro:
             self.jogador_nome = self.jogador_nome_temp_2
             return self.jogador_nome
     
-    def placar(self):
+    def placar(self): #Cria uma janela extra com um placar do jogo
         
         self.janela_placar = tk.Toplevel()
         self.janela_placar.title("Placar")
@@ -281,7 +282,7 @@ class Tabuleiro:
         
         self.janela_placar.mainloop() 
         
-    def vitoria(self):     
+    def vitoria(self): #Configurações tomadas pelo jogo após a vitória de algum jogador
         resultado = self.Main_Game.verifica_ganhador()
         if resultado == 1:
             self.label_principal = self.jogador_nome
@@ -314,7 +315,7 @@ class Tabuleiro:
             self.fim_do_jogo()
         else:
             return -1
-    def fim_do_jogo(self):
+    def fim_do_jogo(self): # Travar os botões do tabuleiro após a vitória
         self.b_1.configure(state = 'disabled')
         self.b_2.configure(state = 'disabled')
         self.b_3.configure(state = 'disabled')
