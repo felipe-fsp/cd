@@ -1,15 +1,15 @@
 import numpy as np
 import random
 
-class jogo():
+class jogamesO():
   def __init__(self):
       self.jogadores = ["X","O"," "] #Representa as duas letras tradicionais do Jogo da Velha
       self.vencedor = "*"
       self.sorteio()
       self.jogador = self.jogadores
       self.tabuleiro = np.zeros([3,3]) #Matriz do jogo
-      self.GXrrt = 0
-      self.GO = 0
+      self.gamesx = 0
+      self.gamesO = 0
   
   
   def jogar(self):
@@ -39,9 +39,9 @@ class jogo():
                 self.jogador = self.jogadores[0]
                 continua = self.verifica_ganhador()
     elif continua == 2:
-        self.GO +=1
+        self.gamesO +=1
     elif verifica == 1:
-        self.GX +=1
+        self.gamesx +=1
     else:
         pass
     
@@ -59,8 +59,8 @@ class jogo():
     or (((self.tabuleiro[2][0] * self.tabuleiro[1][1] * self.tabuleiro[0][2]) > 0) and ((self.tabuleiro[2][0] * self.tabuleiro[1][1] * self.tabuleiro[0][2])%2==0)): 
       self.vencedor="O"
       self.jogador=self.jogadores[2]
-      self.GO+=1
-      print("Jogador O chegou a %d vitórias" % self.GO)
+      self.gamesO+=1
+      print("Jogador O chegou a %d vitórias" % self.gamesO)
       return 2
     
     
@@ -74,8 +74,8 @@ class jogo():
     or (((self.tabuleiro[2][0] * self.tabuleiro[1][1] * self.tabuleiro[0][2]) > 0) and ((self.tabuleiro[2][0] * self.tabuleiro[1][1] * self.tabuleiro[0][2])%2==1)): 
       self.vencedor="X"
       self.jogador=self.jogadores[2]
-      self.GX+=1
-      print("Jogador X chegou a %d vitórias" % self.GX)
+      self.gamesx+=1
+      print("Jogador X chegou a %d vitórias" % self.gamesx)
       return 1
       
     elif np.sum(self.tabuleiro) == 14 or np.sum(self.tabuleiro) == 13:
