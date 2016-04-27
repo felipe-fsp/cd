@@ -8,7 +8,7 @@ class jogo():
       self.sorteio()
       self.jogador = self.jogadores
       self.tabuleiro = np.zeros([3,3]) #Matriz do jogo
-      self.GX = 0
+      self.GXrrt = 0
       self.GO = 0
   
   
