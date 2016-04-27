@@ -67,9 +67,16 @@ class Tabuleiro:
     def limpar_tela(self):
       
         if self.Game_var == 0:
-            self.botão_main.grid_forget()
+            self.Button_Main.grid_forget()
+            self.Label_nome_1.grid_forget()
+            self.Label_nome_2.grid_forget()
+            self.Textbox_1.grid_forget()
+            self.Textbox_2.grid_forget()
+            self.label_principal = ""
+            self.label_principal_show.set("Jogo da Velha")
+            self.Main_Game.limpa_jogadas()            
             self.desenhar_tabuleiro()
-            
+        
         elif self.Game_var >= 1:        
             self.b_1.grid_forget()
             self.b_2.grid_forget()
@@ -82,10 +89,99 @@ class Tabuleiro:
             self.b_9.grid_forget()
             self.Prox_Jogada.grid_forget()   
             self.desenhar_tabuleiro()
-    
+            
     def bo_1(self):
-        self.b_1.configure(text = self.jogador())
-        self.b_1.configure(state = "disabled")        
+        self.Main_Game.recebe_jogada(0,0)
+        self.jogador()        
+        if self.Main_Game.jogador == 1:
+            self.b_1.configure(text = 'X')
+            self.b_1.configure(state = 'disabled', bg = "turquoise1")
+        else:
+            self.b_1.configure(text = 'O')
+            self.b_1.configure(state = 'disabled', bg = "orange red")
+        self.vitoria()
+        
+    def bo_2(self): 
+        self.Main_Game.recebe_jogada(0,1)  
+        self.jogador()
+        if self.Main_Game.jogador == 1:
+            self.b_2.configure(text = 'X')
+            self.b_2.configure(state = 'disabled', bg = "turquoise1")
+        else:
+            self.b_2.configure(text = 'O')
+            self.b_2.configure(state = 'disabled', bg = "orange red")
+        self.vitoria() 
+    def bo_3(self):
+        self.Main_Game.recebe_jogada(0,2)
+        self.jogador()        
+        if self.Main_Game.jogador == 1:
+            self.b_3.configure(text = 'X')
+            self.b_3.configure(state = 'disabled', bg = "turquoise1")
+        else:
+            self.b_3.configure(text = 'O')
+            self.b_3.configure(state = 'disabled', bg = "orange red")
+        self.vitoria() 
+    def bo_4(self):
+        self.Main_Game.recebe_jogada(1,0)
+        self.jogador()        
+        if self.Main_Game.jogador == 1:
+            self.b_4.configure(text = 'X')
+            self.b_4.configure(state = 'disabled', bg = "turquoise1")
+        else:
+            self.b_4.configure(text = 'O')
+            self.b_4.configure(state = 'disabled', bg = "orange red")
+        self.vitoria() 
+    def bo_5(self):
+        self.Main_Game.recebe_jogada(1,1)
+        self.jogador()        
+        if self.Main_Game.jogador == 1:
+            self.b_5.configure(text = 'X')
+            self.b_5.configure(state = 'disabled', bg = "turquoise1")
+        else:
+            self.b_5.configure(text = 'O')
+            self.b_5.configure(state = 'disabled', bg = "orange red")
+        self.vitoria()    
+    def bo_6(self):
+        self.Main_Game.recebe_jogada(1,2)        
+        self.jogador()        
+        if self.Main_Game.jogador == 1:
+            self.b_6.configure(text = 'X')
+            self.b_6.configure(state = 'disabled', bg = "turquoise1")
+        else:
+            self.b_6.configure(text = 'O')
+            self.b_6.configure(state = 'disabled', bg = "orange red")
+        self.vitoria()
+        
+    def bo_7(self):
+        self.Main_Game.recebe_jogada(2,0)        
+        self.jogador()        
+        if self.Main_Game.jogador == 1:
+            self.b_7.configure(text = 'X')
+            self.b_7.configure(state = 'disabled', bg = "turquoise1")
+        else:
+            self.b_7.configure(text = 'O')
+            self.b_7.configure(state = 'disabled', bg = "orange red")
+        self.vitoria()
+    def bo_8(self):
+        self.Main_Game.recebe_jogada(2,1)        
+        self.jogador()        
+        if self.Main_Game.jogador == 1:
+            self.b_8.configure(text = 'X')
+            self.b_8.configure(state = 'disabled', bg = "turquoise1")
+        else:
+            self.b_8.configure(text = 'O')
+            self.b_8.configure(state = 'disabled', bg = "orange red")
+        self.vitoria()
+    def bo_9(self):
+        self.Main_Game.recebe_jogada(2,2)        
+        self.jogador()        
+        if self.Main_Game.jogador == 1:
+            self.b_9.configure(text = 'X')
+            self.b_9.configure(state = 'disabled', bg = "turquoise1")
+        else:
+            self.b_9.configure(text = 'O')
+            self.b_9.configure(state = 'disabled', bg = "orange red")
+        self.vitoria()              
     
     
     def desenhar_tabuleiro(self):
