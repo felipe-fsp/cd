@@ -237,15 +237,15 @@ class Tabuleiro:
     def jogador(self):
         if self.jogador_id == 0:
             self.jogador_id += 1
-            self.jogador_nome = "Superman"
+            self.jogador_nome = self.jogador_nome_temp_2
             self.jogador_nome_var.set("É a vez do " + self.jogador_nome)            
-            self.jogador_nome = "Bambam"
+            self.jogador_nome = self.jogador_nome_temp_1
             return self.jogador_nome
         elif self.jogador_id == 1:
             self.jogador_id -= 1
-            self.jogador_nome = "Bambam"
+            self.jogador_nome = self.jogador_nome_temp_1
             self.jogador_nome_var.set("É a vez do " + self.jogador_nome)            
-            self.jogador_nome = "Superman"
+            self.jogador_nome = self.jogador_nome_temp_2
             return self.jogador_nome
             
     
