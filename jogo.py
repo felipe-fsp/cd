@@ -25,7 +25,11 @@ class jogo():
   
   def verifica_ganhador(self):
   
-  del limpa_jogadas(self):
+  
+  def limpa_jogadas(self):
+    self.matriz = np.zeros([3,3])
+    self.sorteio()
+    self.ganhador = "*"
 
 
 
