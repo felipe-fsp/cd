@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Apr 25 20:39:18 2016
-
-@author: Gabriel
-"""
-
 class Jogos:
          
          def __init__(self):
