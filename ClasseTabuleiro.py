@@ -56,8 +56,15 @@ class Tabuleiro:
         self.Button_Main = tk.Button(self.window,text="Iniciar a partida")        
         self.Button_Main.configure(command = self.enter)      
         self.Button_Main.grid(row=4, column=0, columnspan = 3, rowspan = 1, sticky = "nsew")     
+     
+     def enter(self):       
+        self.jogador_nome_temp_1 = self.jogador_nome_1.get()
+        self.jogador_nome_temp_2 = self.jogador_nome_2.get()
+        self.jogador_nome = self.jogador_nome_temp_1      
+        self.jogador_nome_var.set("É a vez do " + self.jogador_nome)        
+        self.limpar_tela()
+        
     def limpar_tela(self):
-        self.Matriz_Jogo = [[0,0,0],[0,0,0],[0,0,0]]
       
         if self.Game_var == 0:
             self.botão_main.grid_forget()
