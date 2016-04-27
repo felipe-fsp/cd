@@ -9,16 +9,22 @@ class Tabuleiro:
 
         self.Main_Game = ClasseJogo.Jogo()
         self.window = tk.Tk()               
+        self.button = Image.open("Button.jpg")     
+        self.Restart = ImageTk.PhotoImage(self.button)
         self.window.resizable(height = False, width=False)        
-        self.window.title("Tic Tac Toe")
+        self.window.title("Tic Tac Toe Ultimate Championship")
         self.window.geometry("650x650")
         for linhas in range (0,5):
            self.window.rowconfigure(linhas, weight=1)
         for colunas in range (0,3):        
            self.window.columnconfigure(colunas, weight=1)
         self.Game_var = 0
-        self.Jogador_1_vic = 0        
+        self.Game_played_var = tk.StringVar()
+        self.Game_played_var.set("Partidas finalizadas: 0")
+        self.Jogador_1_vic = 0
+        self.Jogador_1_vic_var = tk.StringVar() 
         self.Jogador_2_vic = 0
+        self.Jogador_2_vic_var = tk.StringVar()
         self.jogador_id = 0
         self.jogador_nome_var = tk.StringVar()
         self.jogador_nome_1 = tk.StringVar()
@@ -28,7 +34,7 @@ class Tabuleiro:
         self.jogador_nome = ""
         self.jogador_nome_temp_1 = ""         
         self.jogador_nome_temp_2 = ""
-        self.Text_Main = tk.Label(self.window,text="Jogo da Velha", font = "Britannic 30")
+        self.Text_Main = tk.Label(self.window,text="Jogo da Velha", font = "Elephant 30")
         self.Text_Main.configure( bg = "blue", fg = "white")        
         self.Text_Main.grid(row=0, column=0, columnspan=3, rowspan = 3 ,sticky="nsew")         
         self.Button_Main = tk.Button(self.window,text="Iniciar Jogo")
@@ -61,7 +67,9 @@ class Tabuleiro:
         self.jogador_nome_temp_1 = self.jogador_nome_1.get()
         self.jogador_nome_temp_2 = self.jogador_nome_2.get()
         self.jogador_nome = self.jogador_nome_temp_1      
-        self.jogador_nome_var.set("É a vez do " + self.jogador_nome)        
+        self.jogador_nome_var.set("É a vez do " + self.jogador_nome)
+        self.Jogador_1_vic_var.set("Vitórias do {0}: 0".format(self.jogador_nome_temp_1))        
+        self.Jogador_2_vic_var.set("Vitórias do {0}: 0".format(self.jogador_nome_temp_2))        
         self.limpar_tela()
         
     def limpar_tela(self):
@@ -225,9 +233,13 @@ class Tabuleiro:
         self.Prox_Jogada.configure(textvariable=self.jogador_nome_var)        
         self.Prox_Jogada.grid(row=3, column=0, columnspan=1, rowspan = 1, sticky="nsew") 
         
-        self.Restart_button = tk.Button(self.window)
-        self.Restart_button.configure(command=self.limpar_tela, text = "Reiniciar Jogo")
-        self.Restart_button.grid(row=3, column=2, columnspan=1, rowspan = 1, sticky="nsew")         
+        self.Placar = tk.Button(self.window, font=('Elephant', 10))
+        self.Placar.configure(command = self.placar,text = "Placar" , bg = "cornflower blue", fg = "white")        
+        self.Placar.grid(row=3, column=1, columnspan=1, rowspan = 1, sticky="nsew")
+        
+        self.Restart_button = tk.Button(self.window,image=self.Restart, height = 3, width = 3)
+        self.Restart_button.configure(command=self.limpar_tela, bg = "black")
+        self.Restart_button.grid(row=3, column=2, columnspan=1, rowspan = 1, sticky="nsew")                 
         
         self.Main_label = tk.Label(self.window, font=('Helvetica', 10))
         self.Main_label.configure(textvariable = self.label_principal_show , bg = "white", fg = "blue")        
@@ -247,19 +259,71 @@ class Tabuleiro:
             self.jogador_nome_var.set("É a vez do " + self.jogador_nome)            
             self.jogador_nome = self.jogador_nome_temp_2
             return self.jogador_nome
+    
+    def placar(self):
         
-    def vitoria(self): 
+        self.janela_placar = tk.Toplevel()
+        self.janela_placar.title("Placar")
+        self.janela_placar.geometry("200x210")
+        self.janela_placar.resizable(height = False, width=False)
+        
+        self.Jogo_total = tk.Label(self.janela_placar, font=('Helvetica', 10), height = 4, width = 25)
+        self.Jogo_total.configure(textvariable=self.Game_played_var , bg = "white", fg = "blue")        
+        self.Jogo_total.grid(row=0, column=0, sticky="nsew") 
+        
+        self.Vitórias_1 = tk.Label(self.janela_placar, font=('Helvetica', 10), height = 4, width = 25)
+        self.Vitórias_1.configure(textvariable=self.Jogador_1_vic_var , bg = "white", fg = "blue")        
+        self.Vitórias_1.grid(row=1, column=0, sticky="nsew") 
+        
+        self.Vitórias_2 = tk.Label(self.janela_placar, font=('Helvetica', 10), height = 4, width = 25)
+        self.Vitórias_2.configure(textvariable=self.Jogador_2_vic_var , bg = "white", fg = "blue")        
+        self.Vitórias_2.grid(row=3, column=0, sticky="nsew")  
+        
+        self.janela_placar.mainloop() 
+        
+    def vitoria(self):     
         resultado = self.Main_Game.verifica_ganhador()
         if resultado == 1:
             self.label_principal = self.jogador_nome
-            self.label_principal_show.set("O jogador {0} venceu! Inicie uma outra partida com o botão Reiniciar!".format(self.label_principal))
+            self.label_principal_show.set("O jogador {0} venceu! Inicie uma outra partida com o botão azul Reiniciar!".format(self.label_principal))
+            self.Game_played += 1
+            self.Game_played_var.set("Partidas finalizadas: {0}".format(self.Game_played))
+            self.fim_do_jogo()            
+            if self.jogador_nome == self.jogador_nome_temp_1:
+                self.Jogador_1_vic += 1
+                self.Jogador_1_vic_var.set("Vitórias do {0}: {1}".format(self.jogador_nome_temp_1,self.Jogador_1_vic))
+            else:
+                self.Jogador_2_vic += 1
+                self.Jogador_2_vic_var.set("Vitórias do {0}: {1}".format(self.jogador_nome_temp_2,self.Jogador_2_vic))
         elif resultado == 2:
             self.label_principal = self.jogador_nome
-            self.label_principal_show.set("O jogador {0} venceu! Inicie uma outra partida com o botão Reiniciar!".format(self.label_principal))
+            self.label_principal_show.set("O jogador {0} venceu! Inicie uma outra partida com o botão azul Reiniciar!".format(self.label_principal))
+            self.Game_played += 1
+            self.Game_played_var.set("Partidas finalizadas: {0}".format(self.Game_played))
+            self.fim_do_jogo()
+            if self.jogador_nome == self.jogador_nome_temp_1:
+                self.Jogador_1_vic += 1
+                self.Jogador_1_vic_var.set("Vitórias do {0}: {1}".format(self.jogador_nome_temp_1,self.Jogador_1_vic))
+            else:
+                self.Jogador_2_vic += 1 
+                self.Jogador_2_vic_var.set("Vitórias do {0}: {1}".format(self.jogador_nome_temp_2,self.Jogador_2_vic))
         elif resultado == 0:
-            self.label_principal_show.set("O jogo deu velha! Inicie uma outra partida com o botão Reiniciar!")
+            self.label_principal_show.set("O jogo deu velha! Inicie uma outra partida com o botão azul Reiniciar!")
+            self.Game_played += 1
+            self.Game_played_var.set("Partidas finalizadas: {0}".format(self.Game_played))
+            self.fim_do_jogo()
         else:
-            return -1 
+            return -1
+    def fim_do_jogo(self):
+        self.b_1.configure(state = 'disabled')
+        self.b_2.configure(state = 'disabled')
+        self.b_3.configure(state = 'disabled')
+        self.b_4.configure(state = 'disabled')
+        self.b_5.configure(state = 'disabled')
+        self.b_6.configure(state = 'disabled')
+        self.b_7.configure(state = 'disabled')
+        self.b_8.configure(state = 'disabled')
+        self.b_9.configure(state = 'disabled')
           
     def loop(self):
         self.window.mainloop()
