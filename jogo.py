@@ -9,3 +9,7 @@ class jogo():
       self.tabuleiro = np.zeros([3,3]) #Matriz do jogo
       self.games_X = 0
       self.gamess_O = 0
+      
+
+
+
