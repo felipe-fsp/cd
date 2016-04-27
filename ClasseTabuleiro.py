@@ -35,6 +35,27 @@ class Tabuleiro:
         self.Button_Main.configure(command=self.escolha_jogadores)
         self.Button_Main.grid(row=3, column=0, columnspan =3, rowspan = 2, sticky = "nsew")
         
+    def escolha_jogadores(self):
+        self.Button_Main.grid_forget()        
+        self.Text_Main.grid_forget()
+        
+        self.Label_nome_1 = tk.Label(self.window,text="Escolha o nome para o jogador X", font = "Helvetica", fg = "white", bg = "blue")        
+        self.Label_nome_1.grid(row=0, column=0, columnspan =3, rowspan = 1, sticky = "nsew")       
+        
+        self.Textbox_1 = tk.Entry(self.window)
+        self.Textbox_1.configure(textvariable=self.jogador_nome_1,font = "Helvetica 20")
+        self.Textbox_1.grid(row=1, column=0, columnspan = 3, rowspan = 1, sticky="nsew")     
+        
+        self.Label_nome_2 = tk.Label(self.window,text="Escolha o nome para o jogador O", font = "Helvetica", fg = "white", bg = "blue")        
+        self.Label_nome_2.grid(row=2, column=0, columnspan =3, sticky = "nsew")
+
+        self.Textbox_2 = tk.Entry(self.window)
+        self.Textbox_2.configure(textvariable=self.jogador_nome_2, font = "Helvetica 20")
+        self.Textbox_2.grid(row=3, column=0, columnspan = 3, rowspan = 1, sticky="nsew")            
+
+        self.Button_Main = tk.Button(self.window,text="Iniciar a partida")        
+        self.Button_Main.configure(command = self.enter)      
+        self.Button_Main.grid(row=4, column=0, columnspan = 3, rowspan = 1, sticky = "nsew")     
     def limpar_tela(self):
         self.Matriz_Jogo = [[0,0,0],[0,0,0],[0,0,0]]
       
