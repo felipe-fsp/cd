@@ -16,10 +16,10 @@ class jogo():
     self.window.mainloop()
   def sorteio(self):
     b=random.uniform(0,20)
-	  if int(b)%2==0:
-	    self.jogador=self.jogadores[0]
-	  else:
-	    self.jogador=self.jogadores[1]
+    if int(b)%2==0:
+    	self.jogador=self.jogadores[0]
+    else:
+    	self.jogador=self.jogadores[1]
     
   def recebe_jogada(self,l,c):
   
