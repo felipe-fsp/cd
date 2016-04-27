@@ -13,14 +13,19 @@ class jogo():
   
   
   def jogar(self):
-    
-  def sorteio(self): #Precisamos pensar na lógica em python para sortear, mas vamos usar "random"
+    self.window.mainloop()
+  def sorteio(self):
+    b=random.uniform(0,20)
+	  if int(b)%2==0:
+	    self.jogador=self.jogadores[0]
+	  else:
+	    self.jogador=self.jogadores[1]
     
   def recebe_jogada(self,l,c):
   
   def verifica_ganhador(self):
   
-  fel limpa_jogadas(self):
+  del limpa_jogadas(self):
 
 
 
