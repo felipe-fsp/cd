@@ -247,9 +247,19 @@ class Tabuleiro:
             self.jogador_nome_var.set("É a vez do " + self.jogador_nome)            
             self.jogador_nome = self.jogador_nome_temp_2
             return self.jogador_nome
-            
-    
         
+    def vitoria(self): 
+        resultado = self.Main_Game.verifica_ganhador()
+        if resultado == 1:
+            self.label_principal = self.jogador_nome
+            self.label_principal_show.set("O jogador {0} venceu! Inicie uma outra partida com o botão Reiniciar!".format(self.label_principal))
+        elif resultado == 2:
+            self.label_principal = self.jogador_nome
+            self.label_principal_show.set("O jogador {0} venceu! Inicie uma outra partida com o botão Reiniciar!".format(self.label_principal))
+        elif resultado == 0:
+            self.label_principal_show.set("O jogo deu velha! Inicie uma outra partida com o botão Reiniciar!")
+        else:
+            return -1 
           
     def loop(self):
         self.window.mainloop()
